@@ -24,6 +24,10 @@ from urllib.parse import urlsplit
 
 
 def run(data):
+    if not isinstance(data, dict):
+        raise ValueError("A entrada deve ser um objeto JSON.")
+    if not isinstance(data["obras"], list) or any(not isinstance(item, dict) for item in data["obras"]):
+        raise ValueError("O campo obras deve ser uma lista de objetos.")
     livro = chave(data["livro"])
     tipo = chave(data["tipo"]) if data.get("tipo") else None
     obras = []
@@ -66,3 +70,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
