@@ -1,0 +1,49 @@
+{
+  "livro": "João",
+  "obras": [
+    {
+      "titulo": "Nova Bíblia de Estudo Almeida",
+      "editora": "SBB",
+      "tipo": "bíblia de estudo",
+      "livros": [
+        "*"
+      ],
+      "url": "https://www.sbb.org.br/nova-almeida/biblias-de-estudo/biblia-de-estudo-almeida"
+    },
+    {
+      "titulo": "Comentário Bíblico Pentecostal Novo Testamento",
+      "editora": "CPAD",
+      "tipo": "comentário",
+      "livros": [
+        "Mateus",
+        "Marcos",
+        "Lucas",
+        "João",
+        "Atos",
+        "Romanos",
+        "1 Coríntios",
+        "2 Coríntios",
+        "Gálatas",
+        "Efésios",
+        "Filipenses",
+        "Colossenses",
+        "1 Tessalonicenses",
+        "2 Tessalonicenses",
+        "1 Timóteo",
+        "2 Timóteo",
+        "Tito",
+        "Filemom",
+        "Hebreus",
+        "Tiago",
+        "1 Pedro",
+        "2 Pedro",
+        "1 João",
+        "2 João",
+        "3 João",
+        "Judas",
+        "Apocalipse"
+      ],
+      "url": "https://www.cpad.com.br/comentario-biblico-pentecostal-novo-testamento-/p"
+    }
+  ]
+}
