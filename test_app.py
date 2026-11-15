@@ -15,6 +15,13 @@ class ProjetoTest(unittest.TestCase):
         result = run(data)
         self.assertEqual(result['quantidade'], 2)
 
+    def test_filtros_com_tipos_errados_nao_sao_ignorados(self):
+        data = json.loads((ROOT / "exemplo.json").read_text(encoding="utf-8"))
+        for invalid in (False, 0, [], {}):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                run(dict(data, tipo=invalid))
+        self.assertEqual(run(dict(data, tipo=None)), run(dict(data, tipo="")))
+
     def test_cli_com_exemplo(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "app.py"), str(ROOT / "exemplo.json")],
