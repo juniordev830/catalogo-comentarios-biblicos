@@ -29,7 +29,8 @@ def run(data):
     if not isinstance(data["obras"], list) or any(not isinstance(item, dict) for item in data["obras"]):
         raise ValueError("O campo obras deve ser uma lista de objetos.")
     livro = chave(data["livro"])
-    tipo = chave(data["tipo"]) if data.get("tipo") else None
+    tipo_informado = data.get("tipo")
+    tipo = None if tipo_informado in (None, "") else chave(tipo_informado)
     obras = []
     for item in data["obras"]:
         livros = {chave(nome) for nome in textos(item["livros"])}
