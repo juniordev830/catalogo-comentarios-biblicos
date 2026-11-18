@@ -24,6 +24,19 @@ class InputValidationTest(unittest.TestCase):
         run(self.data)
         self.assertEqual(self.data, original)
 
+    def test_rejeita_urls_que_o_parser_aceita_parcialmente(self):
+        for url in ("https://@example.com/obra", "https://example.com:65536/obra",
+                    "https://example.com/linha\nseguinte", "https://example.com/nome da obra"):
+            with self.subTest(url=url), self.assertRaisesRegex(ValueError, "HTTPS pública"):
+                data = copy.deepcopy(self.data)
+                data["obras"][0]["url"] = url
+                run(data)
+
+    def test_link_codificado_continua_aceito(self):
+        link = "https://example.com:443/nome%20da%20obra"
+        self.data["obras"][0]["url"] = link
+        self.assertIn(link, [obra["url"] for obra in run(self.data)["obras"]])
+
     def test_invalid_json_cli(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "invalid.json"
