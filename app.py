@@ -23,6 +23,19 @@ def chave(value):
 from urllib.parse import urlsplit
 
 
+def url_editora(value):
+    endereco = texto(value)
+    try:
+        url = urlsplit(endereco)
+        url.port  # A leitura da porta valida o formato e o intervalo.
+    except ValueError:
+        raise ValueError("Use a URL HTTPS pública da editora.") from None
+    if (url.scheme != "https" or not url.hostname or url.username is not None
+            or url.password is not None or any(char.isspace() for char in endereco)):
+        raise ValueError("Use a URL HTTPS pública da editora.")
+    return endereco
+
+
 def run(data):
     if not isinstance(data, dict):
         raise ValueError("A entrada deve ser um objeto JSON.")
@@ -38,10 +51,8 @@ def run(data):
             continue
         if tipo is not None and tipo != chave(item["tipo"]):
             continue
-        url = urlsplit(texto(item["url"]))
-        if url.scheme != "https" or not url.hostname or url.username or url.password:
-            raise ValueError("Use a URL HTTPS pública da editora.")
-        registro = {k: texto(item[k]) for k in ("titulo", "editora", "tipo", "url")}
+        registro = {k: texto(item[k]) for k in ("titulo", "editora", "tipo")}
+        registro["url"] = url_editora(item["url"])
         obras.append(registro)
     obras.sort(key=lambda item: chave(item["titulo"]))
     return {"livro": texto(data["livro"]), "obras": obras, "quantidade": len(obras)}
