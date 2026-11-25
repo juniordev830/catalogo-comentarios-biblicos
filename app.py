@@ -44,6 +44,8 @@ def run(data):
     livro = chave(data["livro"])
     tipo_informado = data.get("tipo")
     tipo = None if tipo_informado in (None, "") else chave(tipo_informado)
+    pesquisa = data.get("pesquisa")
+    termo = chave(pesquisa) if pesquisa is not None else None
     obras = []
     for item in data["obras"]:
         livros = {chave(nome) for nome in textos(item["livros"])}
@@ -52,6 +54,8 @@ def run(data):
         if tipo is not None and tipo != chave(item["tipo"]):
             continue
         registro = {k: texto(item[k]) for k in ("titulo", "editora", "tipo")}
+        if termo is not None and not any(termo in chave(registro[k]) for k in ("titulo", "editora")):
+            continue
         registro["url"] = url_editora(item["url"])
         obras.append(registro)
     obras.sort(key=lambda item: chave(item["titulo"]))
