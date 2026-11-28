@@ -1,5 +1,7 @@
 # Catálogo de comentários bíblicos
 
+**Navegação** · [Rodar](#rodar) · [Uso](#uso) · [Fontes e exemplos](#fontes-e-exemplos) · [Código e estudo](docs/ENGENHARIA_REVERSA.md)
+
 Encontre edições e obras de referência por livro bíblico e tipo de material.
 
 ## Rodar
@@ -28,3 +30,9 @@ Também é possível encadear a ferramenta com outro comando usando `-` como ent
 ```bash
 cat exemplo.json | python app.py -
 ```
+
+## Código e roteiro de estudo
+
+Como indexar uma obra que cobre vários livros sem repeti-la nos resultados? O [guia de engenharia reversa](docs/ENGENHARIA_REVERSA.md) reúne o mapa dos módulos e uma pergunta técnica baseada no projeto.
+
+Mantido por [João Junior](https://github.com/juniordev830).
